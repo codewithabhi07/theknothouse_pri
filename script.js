@@ -56,9 +56,6 @@ const products = [
     }
 ];
 
-/* --- State --- */
-let cart = [];
-
 /* --- Selectors --- */
 const navbar = document.getElementById('navbar');
 const mobileToggle = document.getElementById('mobile-toggle');
@@ -67,14 +64,7 @@ const bestSellersContainer = document.getElementById('best-sellers-container');
 const mainProductsGrid = document.getElementById('main-products-grid');
 const filterBtns = document.querySelectorAll('.filter-btn');
 const backToTopBtn = document.getElementById('back-to-top');
-const cartBtn = document.getElementById('cart-btn');
-const cartSidebar = document.getElementById('cart-sidebar');
-const cartOverlay = document.getElementById('cart-overlay');
-const closeCart = document.getElementById('close-cart');
-const cartItemsContainer = document.getElementById('cart-items');
-const cartTotalAmt = document.getElementById('cart-total-amt');
-const cartCount = document.querySelector('.cart-count');
-const checkoutBtn = document.getElementById('checkout-btn');
+const cursor = document.getElementById('cursor');
 
 /* --- Initialization --- */
 document.addEventListener('DOMContentLoaded', () => {
@@ -82,21 +72,48 @@ document.addEventListener('DOMContentLoaded', () => {
     renderProducts(products.filter(p => p.bestSeller), bestSellersContainer);
     initAccordions();
     initRevealAnimations();
+    initCustomCursor();
+    initMagneticButtons();
 });
 
 /* --- Functions --- */
 
+// Custom Cursor
+function initCustomCursor() {
+    if (!cursor) return;
+    document.addEventListener('mousemove', (e) => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+    });
+
+    document.querySelectorAll('a, button, .product-card').forEach(el => {
+        el.addEventListener('mouseenter', () => cursor.style.transform = 'scale(2.5)');
+        el.addEventListener('mouseleave', () => cursor.style.transform = 'scale(1)');
+    });
+}
+
+// Magnetic Buttons
+function initMagneticButtons() {
+    const magnets = document.querySelectorAll('.magnet');
+    magnets.forEach((btn) => {
+        btn.addEventListener('mousemove', (e) => {
+            const position = btn.getBoundingClientRect();
+            const x = e.pageX - position.left - position.width / 2;
+            const y = e.pageY - position.top - position.height / 2;
+            btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+        });
+        btn.addEventListener('mouseout', () => {
+            btn.style.transform = 'translate(0px, 0px)';
+        });
+    });
+}
+
 // Reveal Animations on Scroll
 function initRevealAnimations() {
-    const observerOptions = {
-        threshold: 0.1
-    };
-
+    const observerOptions = { threshold: 0.1 };
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-            }
+            if (entry.isIntersecting) entry.target.classList.add('active');
         });
     }, observerOptions);
 
@@ -114,15 +131,16 @@ function renderProducts(productsList, container) {
             <div class="product-img-wrapper">
                 <img src="${product.image}" alt="${product.name}">
                 <div class="product-actions">
-                    <button class="btn btn-secondary icon-btn" onclick="addToCart(${product.id})">
-                        <i data-lucide="shopping-bag"></i> Add to Bag
+                    <button class="btn btn-primary w-100" onclick="inquireProduct('${product.name}', ${product.price})">
+                        <i data-lucide="message-circle"></i> Inquire
                     </button>
-                    <button class="btn btn-primary" onclick="buyNow(${product.id})">Buy Now</button>
                 </div>
             </div>
             <div class="product-info">
-                <span class="product-category">${product.category}</span>
-                <h3 class="product-name">${product.name}</h3>
+                <div class="product-details">
+                    <span class="product-category">${product.category}</span>
+                    <h3 class="product-name">${product.name}</h3>
+                </div>
                 <p class="product-price">₹${product.price.toFixed(2)}</p>
             </div>
         </div>
@@ -134,97 +152,18 @@ function renderProducts(productsList, container) {
 filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
         const filter = btn.getAttribute('data-filter');
-        
-        // Update active button
         filterBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-
-        // Filter products
-        const filteredProducts = filter === 'all' 
-            ? products 
-            : products.filter(p => p.category === filter);
-        
+        const filteredProducts = filter === 'all' ? products : products.filter(p => p.category === filter);
         renderProducts(filteredProducts, mainProductsGrid);
     });
 });
 
-// Cart Logic
-function addToCart(productId) {
-    const product = products.find(p => p.id === productId);
-    const existingItem = cart.find(item => item.id === productId);
-
-    if (existingItem) {
-        existingItem.quantity += 1;
-    } else {
-        cart.push({ ...product, quantity: 1 });
-    }
-
-    updateCartUI();
-    openCartSidebar();
-}
-
-function buyNow(productId) {
-    const product = products.find(p => p.id === productId);
-    const message = encodeURIComponent(`नमस्ते! I'd like to buy the ${product.name} (₹${product.price.toFixed(2)}).`);
+// WhatsApp Inquiry
+function inquireProduct(name, price) {
+    const message = encodeURIComponent(`नमस्ते! I'm interested in the "${name}" (₹${price.toFixed(2)}). Can you share more details?`);
     window.open(`https://wa.me/9373229256?text=${message}`, '_blank');
 }
-
-function removeFromCart(productId) {
-    cart = cart.filter(item => item.id !== productId);
-    updateCartUI();
-}
-
-function updateCartUI() {
-    // Update items list
-    if (cart.length === 0) {
-        cartItemsContainer.innerHTML = '<p class="empty-msg">Your bag is empty.</p>';
-    } else {
-        cartItemsContainer.innerHTML = cart.map(item => `
-            <div class="cart-item">
-                <div class="cart-item-img">
-                    <img src="${item.image}" alt="${item.name}">
-                </div>
-                <div class="cart-item-info">
-                    <h4>${item.name}</h4>
-                    <p>${item.quantity} x ₹${item.price.toFixed(2)}</p>
-                    <button class="remove-item" onclick="removeFromCart(${item.id})">Remove</button>
-                </div>
-            </div>
-        `).join('');
-    }
-
-    // Update total and count
-    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    cartTotalAmt.innerText = `₹${total.toFixed(2)}`;
-    
-    const count = cart.reduce((sum, item) => sum + item.quantity, 0);
-    cartCount.innerText = count;
-}
-
-function openCartSidebar() {
-    cartSidebar.classList.add('open');
-    cartOverlay.style.display = 'block';
-}
-
-function closeCartSidebar() {
-    cartSidebar.classList.remove('open');
-    cartOverlay.style.display = 'none';
-}
-
-// WhatsApp Checkout
-checkoutBtn.addEventListener('click', () => {
-    if (cart.length === 0) return alert('Your bag is empty!');
-    
-    let message = "नमस्ते! I'd like to place an order from The Knot House:\n\n";
-    cart.forEach(item => {
-        message += `- ${item.name} (x${item.quantity}): ₹${(item.price * item.quantity).toFixed(2)}\n`;
-    });
-    
-    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    message += `\nTotal Amount: ₹${total.toFixed(2)}`;
-    
-    window.open(`https://wa.me/9373229256?text=${encodeURIComponent(message)}`, '_blank');
-});
 
 // UI Interactions
 mobileToggle.addEventListener('click', () => {
@@ -235,7 +174,6 @@ mobileToggle.addEventListener('click', () => {
     lucide.createIcons();
 });
 
-// Close mobile menu on link click
 navLinks.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
         navLinks.classList.remove('active');
@@ -244,14 +182,12 @@ navLinks.querySelectorAll('a').forEach(link => {
 });
 
 window.addEventListener('scroll', () => {
-    // Sticky Nav
     if (window.scrollY > 50) {
         navbar.classList.add('sticky');
     } else {
         navbar.classList.remove('sticky');
     }
 
-    // Back to top
     if (window.scrollY > 500) {
         backToTopBtn.style.display = 'flex';
     } else {
@@ -263,17 +199,12 @@ backToTopBtn.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-cartBtn.addEventListener('click', openCartSidebar);
-closeCart.addEventListener('click', closeCartSidebar);
-cartOverlay.addEventListener('click', closeCartSidebar);
-
 function initAccordions() {
     const items = document.querySelectorAll('.accordion-item');
     items.forEach(item => {
         const header = item.querySelector('.accordion-header');
         header.addEventListener('click', () => {
             const isActive = item.classList.contains('active');
-            // Close others
             items.forEach(i => i.classList.remove('active'));
             if (!isActive) item.classList.add('active');
         });
