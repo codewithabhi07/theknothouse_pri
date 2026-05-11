@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Knot House | Aesthetic Handmade Crochet</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- Lucide Icons (CDN) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <!-- 14. Footer with social links (defined early for sticky layouts if needed, but placed at bottom) -->
+
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">The Knot House</a>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#products">Shop</a></li>
+                <li><a href="#custom">Custom Orders</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="nav-icons">
+                <button class="icon-btn search-toggle"><i data-lucide="search"></i></button>
+                <button class="icon-btn cart-toggle" id="cart-btn">
+                    <i data-lucide="shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </button>
+                <button class="mobile-menu-toggle" id="mobile-toggle">
+                    <i data-lucide="menu"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- 1. Hero Section -->
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <span class="hero-subtitle">Handmade with Love & Care</span>
+                <h1 class="hero-title">Elevate Your Space with Aesthetic Crochet</h1>
+                <p class="hero-description">Discover the warmth of handcrafted luxury. From eternal flowers to cozy home decor, every stitch tells a story.</p>
+                <div class="hero-btns">
+                    <a href="#products" class="btn btn-primary">Shop Collection</a>
+                    <a href="#custom" class="btn btn-secondary">Custom Request</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. About The Knot House -->
+        <section class="about section" id="about">
+            <div class="container grid grid-2">
+                <div class="about-img reveal">
+                    <img src="https://images.unsplash.com/photo-1610444558223-b67329598f39?auto=format&fit=crop&q=80&w=800" alt="Crochet Artist at Work" class="rounded">
+                </div>
+                <div class="about-content">
+                    <h2 class="section-title">The Story Behind The Knot House</h2>
+                    <p>Welcome to The Knot House, where traditional craftsmanship meets modern aesthetic. What started as a small passion for crochet has grown into a boutique brand dedicated to creating "handmade luxury" for your everyday life.</p>
+                    <p>Our products are inspired by the soft tones of nature and the cozy "Pinterest-perfect" lifestyle. We believe that something handmade holds more value than anything mass-produced.</p>
+                    <div class="about-stats">
+                        <div class="stat">
+                            <h3>100%</h3>
+                            <p>Handmade</p>
+                        </div>
+                        <div class="stat">
+                            <h3>500+</h3>
+                            <p>Orders Sent</p>
+                        </div>
+                        <div class="stat">
+                            <h3>@the.knothouse</h3>
+                            <p>Instagram</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Product Showcase Gallery (Pinterest Inspired) -->
+        <section class="gallery section">
+            <div class="container">
+                <h2 class="section-title text-center">Gallery of Creations</h2>
+                <div class="pinterest-grid">
+                    <div class="grid-item item-tall"><img src="https://images.unsplash.com/photo-1621618684784-25e14fc8281f?auto=format&fit=crop&q=80&w=600" alt="Crochet Flowers"></div>
+                    <div class="grid-item"><img src="https://images.unsplash.com/photo-1621618684232-40f4439c368d?auto=format&fit=crop&q=80&w=600" alt="Keychains"></div>
+                    <div class="grid-item"><img src="https://images.unsplash.com/photo-1610444558055-613f17f461e7?auto=format&fit=crop&q=80&w=600" alt="Home Decor"></div>
+                    <div class="grid-item item-tall"><img src="https://images.unsplash.com/photo-1603513492128-ba7bc9b3e143?auto=format&fit=crop&q=80&w=600" alt="Custom Gifts"></div>
+                    <div class="grid-item"><img src="https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&q=80&w=600" alt="Plushies"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Best Sellers Section -->
+        <section class="best-sellers section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Best Sellers</h2>
+                    <p>Our most loved handmade treasures.</p>
+                </div>
+                <div class="products-grid" id="best-sellers-container">
+                    <!-- JavaScript will inject best sellers here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Product Showcase (Filterable) -->
+        <section class="products section" id="products">
+            <div class="container">
+                <h2 class="section-title text-center">Our Collection</h2>
+                <div class="filter-btns">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="flowers">Flowers</button>
+                    <button class="filter-btn" data-filter="keychains">Keychains</button>
+                    <button class="filter-btn" data-filter="decor">Decor</button>
+                    <button class="filter-btn" data-filter="gifts">Gifts</button>
+                </div>
+                <div class="products-grid" id="main-products-grid">
+                    <!-- JavaScript will inject all products here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Custom Orders & 7. Gifting & Decor -->
+        <section class="custom-orders section" id="custom">
+            <div class="container grid grid-2">
+                <div class="custom-content">
+                    <h2 class="section-title">Custom Creations</h2>
+                    <p>Have a specific vision in mind? We specialize in personalized crochet gifts and custom home decor items. Choose your colors, styles, and patterns.</p>
+                    <ul class="custom-list">
+                        <li><i data-lucide="check-circle"></i> Custom Color Palettes</li>
+                        <li><i data-lucide="check-circle"></i> Personalized Initials</li>
+                        <li><i data-lucide="check-circle"></i> Custom Flower Arrangements</li>
+                        <li><i data-lucide="check-circle"></i> Bulk Corporate Gifting</li>
+                    </ul>
+                    <a href="https://wa.me/9373229256?text=Hi, I'd like to inquire about a custom crochet order." target="_blank" class="btn btn-whatsapp">
+                        <i data-lucide="message-circle"></i> Inquire on WhatsApp
+                    </a>
+                </div>
+                <div class="custom-img">
+                    <img src="https://images.unsplash.com/photo-1610444558223-b67329598f39?auto=format&fit=crop&q=80&w=800" alt="Custom Orders" class="rounded shadow">
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. WhatsApp Floating Button -->
+        <a href="https://wa.me/9373229256" class="whatsapp-float" target="_blank" title="Order via WhatsApp">
+            <i data-lucide="message-circle"></i>
+        </a>
+
+        <!-- 9. Instagram Section -->
+        <section class="instagram section">
+            <div class="container text-center">
+                <h2 class="section-title">Follow Us on Instagram</h2>
+                <p class="mb-2">Get daily doses of crochet cuteness <a href="https://instagram.com/the.knothouse" target="_blank" class="text-accent">@the.knothouse</a></p>
+                <div class="insta-grid">
+                    <!-- 6 small square images -->
+                    <div class="insta-item"><img src="https://images.unsplash.com/photo-1610444558055-613f17f461e7?auto=format&fit=crop&q=80&w=300" alt="Insta Post"></div>
+                    <div class="insta-item"><img src="https://images.unsplash.com/photo-1621618684784-25e14fc8281f?auto=format&fit=crop&q=80&w=300" alt="Insta Post"></div>
+                    <div class="insta-item"><img src="https://images.unsplash.com/photo-1603513492128-ba7bc9b3e143?auto=format&fit=crop&q=80&w=300" alt="Insta Post"></div>
+                    <div class="insta-item"><img src="https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&q=80&w=300" alt="Insta Post"></div>
+                    <div class="insta-item"><img src="https://images.unsplash.com/photo-1621618684232-40f4439c368d?auto=format&fit=crop&q=80&w=300" alt="Insta Post"></div>
+                    <div class="insta-item"><img src="https://images.unsplash.com/photo-1610444558223-b67329598f39?auto=format&fit=crop&q=80&w=300" alt="Insta Post"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10. Testimonials -->
+        <section class="testimonials section">
+            <div class="container">
+                <h2 class="section-title text-center">What Our Customers Say</h2>
+                <div class="testimonial-slider">
+                    <div class="testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <p>"The crochet flowers are so beautiful and realistic! They look perfect in my room and never wilt. Highly recommend!"</p>
+                        <span class="author">- Sarah M.</span>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <p>"Bought a custom keychain for my best friend and she absolutely loved it. The quality is top-notch."</p>
+                        <span class="author">- Emily R.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 11. FAQ Section -->
+        <section class="faq section">
+            <div class="container max-width-700">
+                <h2 class="section-title text-center">Frequently Asked Questions</h2>
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header">How long do custom orders take? <i data-lucide="chevron-down"></i></button>
+                        <div class="accordion-body">
+                            <p>Typically, custom orders take 7-10 business days to complete and ship, depending on complexity.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-header">Do you ship worldwide? <i data-lucide="chevron-down"></i></button>
+                        <div class="accordion-body">
+                            <p>Currently, we ship within the country, but international shipping can be arranged for bulk orders.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 12. Contact Form -->
+        <section class="contact section" id="contact">
+            <div class="container grid grid-2">
+                <div class="contact-info">
+                    <h2 class="section-title">Get in Touch</h2>
+                    <p>Questions about our products or your order? Feel free to reach out!</p>
+                    <div class="contact-methods">
+                        <div class="method">
+                            <i data-lucide="mail"></i>
+                            <span>hello@theknothouse.com</span>
+                        </div>
+                        <div class="method">
+                            <i data-lucide="instagram"></i>
+                            <span>@the.knothouse</span>
+                        </div>
+                    </div>
+                </div>
+                <form id="contact-form" class="contact-form glass">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" required placeholder="Your Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" required placeholder="Your Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" rows="5" required placeholder="Tell us what's on your mind..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Send Message</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- 13. Newsletter -->
+        <section class="newsletter section">
+            <div class="container text-center">
+                <div class="newsletter-card glass">
+                    <h2 class="section-title">Join the Knot Family</h2>
+                    <p>Subscribe for early access to new collections and exclusive discounts.</p>
+                    <form id="newsletter-form" class="newsletter-form">
+                        <input type="email" placeholder="Your Email Address" required>
+                        <button type="submit" class="btn btn-accent">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 14. Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>The Knot House</h3>
+                    <p>Making everyday life a little more aesthetic with handmade crochet luxury.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#products">Shop</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h4>Follow Us</h4>
+                    <div class="social-icons">
+                        <a href="#"><i data-lucide="instagram"></i></a>
+                        <a href="#"><i data-lucide="facebook"></i></a>
+                        <a href="#"><i data-lucide="twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 The Knot House. All rights reserved.</p>
+                <p class="credit">frontend lalit 7775025688</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top"><i data-lucide="arrow-up"></i></button>
+
+    <!-- Cart Sidebar (Glassmorphism) -->
+    <div class="cart-overlay" id="cart-overlay"></div>
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3>Your Bag</h3>
+            <button id="close-cart"><i data-lucide="x"></i></button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <!-- Items injected by JS -->
+            <p class="empty-msg">Your bag is empty.</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cart-total-amt">₹0.00</span>
+            </div>
+            <button class="btn btn-primary w-100 mt-1" id="checkout-btn">Proceed to WhatsApp Order</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>
