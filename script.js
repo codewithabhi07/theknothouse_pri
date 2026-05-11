@@ -1,56 +1,56 @@
-/* --- Product Data --- */
+/* --- Product Data (Inspired by The Knot House Branding) --- */
 const products = [
     {
         id: 1,
-        name: "Eternal Rose Bouquet",
+        name: "Luxe Eternal Rose",
         category: "flowers",
-        price: 25.00,
-        description: "A beautiful handmade bouquet of 5 eternal roses that never wilt.",
-        image: "https://images.unsplash.com/photo-1621618684784-25e14fc8281f?auto=format&fit=crop&q=80&w=600",
+        price: 499,
+        description: "Hand-stitched premium roses that symbolize eternal love. A centerpiece that never wilts.",
+        image: "https://images.unsplash.com/photo-1621618684784-25e14fc8281f?auto=format&fit=crop&q=80&w=800",
         bestSeller: true
     },
     {
         id: 2,
-        name: "Daisy Charm Keychain",
-        category: "keychains",
-        price: 8.50,
-        description: "Cute and dainty daisy charm to brighten up your keys.",
-        image: "https://images.unsplash.com/photo-1621618684232-40f4439c368d?auto=format&fit=crop&q=80&w=600",
+        name: "Cyber-Tulip Stem",
+        category: "flowers",
+        price: 199,
+        description: "Minimalist aesthetic tulip stems. Perfect for desk vases or gifting.",
+        image: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&q=80&w=800",
         bestSeller: true
     },
     {
         id: 3,
-        name: "Pastel Lavender Basket",
-        category: "decor",
-        price: 18.00,
-        description: "Soft lavender storage basket for an aesthetic desk setup.",
-        image: "https://images.unsplash.com/photo-1610444558055-613f17f461e7?auto=format&fit=crop&q=80&w=600",
+        name: "Stellar Daisy Keychain",
+        category: "keychains",
+        price: 149,
+        description: "A pop of color for your keys or bags. Soft, durable, and uniquely handmade.",
+        image: "https://images.unsplash.com/photo-1621618684232-40f4439c368d?auto=format&fit=crop&q=80&w=800",
         bestSeller: false
     },
     {
         id: 4,
-        name: "Custom Initials Heart",
+        name: "Personalized Initial Heart",
         category: "gifts",
-        price: 12.00,
-        description: "A personalized heart charm with your chosen initials.",
-        image: "https://images.unsplash.com/photo-1603513492128-ba7bc9b3e143?auto=format&fit=crop&q=80&w=600",
+        price: 299,
+        description: "A custom heart charm with your initials. The ultimate personalized gift.",
+        image: "https://images.unsplash.com/photo-1603513492128-ba7bc9b3e143?auto=format&fit=crop&q=80&w=800",
         bestSeller: true
     },
     {
         id: 5,
-        name: "Sunflower Stem",
-        category: "flowers",
-        price: 6.00,
-        description: "A single cheerful sunflower stem for your favorite vase.",
-        image: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&q=80&w=600",
+        name: "Midnight Lavender Basket",
+        category: "decor",
+        price: 899,
+        description: "Artisan storage basket in a deep lavender hue. Practical yet incredibly aesthetic.",
+        image: "https://images.unsplash.com/photo-1610444558055-613f17f461e7?auto=format&fit=crop&q=80&w=800",
         bestSeller: false
     },
     {
         id: 6,
-        name: "Mini Cactus Plushie",
+        name: "Neon Cactus Amigurumi",
         category: "decor",
-        price: 10.00,
-        description: "Adorable mini cactus that requires zero watering.",
+        price: 349,
+        description: "The cutest desk companion. Zero maintenance, 100% aesthetic.",
         image: "https://images.unsplash.com/photo-1610444558223-b67329598f39?auto=format&fit=crop&q=80&w=800",
         bestSeller: false
     }
@@ -87,8 +87,14 @@ function initCustomCursor() {
     });
 
     document.querySelectorAll('a, button, .product-card').forEach(el => {
-        el.addEventListener('mouseenter', () => cursor.style.transform = 'scale(2.5)');
-        el.addEventListener('mouseleave', () => cursor.style.transform = 'scale(1)');
+        el.addEventListener('mouseenter', () => {
+            cursor.style.transform = 'scale(2.5)';
+            cursor.style.border = '1px solid var(--accent-neon)';
+        });
+        el.addEventListener('mouseleave', () => {
+            cursor.style.transform = 'scale(1)';
+            cursor.style.border = 'none';
+        });
     });
 }
 
@@ -141,7 +147,7 @@ function renderProducts(productsList, container) {
                     <span class="product-category">${product.category}</span>
                     <h3 class="product-name">${product.name}</h3>
                 </div>
-                <p class="product-price">₹${product.price.toFixed(2)}</p>
+                <p class="product-price">₹${product.price}</p>
             </div>
         </div>
     `).join('');
@@ -161,7 +167,7 @@ filterBtns.forEach(btn => {
 
 // WhatsApp Inquiry
 function inquireProduct(name, price) {
-    const message = encodeURIComponent(`नमस्ते! I'm interested in the "${name}" (₹${price.toFixed(2)}). Can you share more details?`);
+    const message = encodeURIComponent(`Yoo! I'm obsessed with this "${name}" (₹${price}). Can I commission one for myself? ✨`);
     window.open(`https://wa.me/9373229256?text=${message}`, '_blank');
 }
 
@@ -216,7 +222,7 @@ const contactForm = document.getElementById('contact-form');
 if (contactForm) {
     contactForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        alert('Thank you for your message! We will get back to you soon.');
+        alert('Transmission received! We will get back to you soon.');
         contactForm.reset();
     });
 }
@@ -225,7 +231,7 @@ const newsletterForm = document.getElementById('newsletter-form');
 if (newsletterForm) {
     newsletterForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        alert('Thank you for subscribing to our newsletter!');
+        alert('Welcome to the Knot Family! Check your inbox soon.');
         newsletterForm.reset();
     });
 }
